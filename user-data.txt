@@ -14,3 +14,12 @@ wget https://joe-oregan-s3.s3.us-east-1.amazonaws.com/couponservice_v2_rds.jar -
 
 # Run the JAR in the background so it doesn't block boot
 nohup java -jar /opt/myapp/couponservice_v2_rds.jar > /opt/myapp/app.log 2>&1 &
+
+# Install http daemon web server
+yum install -y httpd
+
+# Get a test index file from the S3 bucket
+wget https://joe-oregan-s3.s3.us-east-1.amazonaws.com/index.html -O /var/www/html/index.html
+
+# Start httpd
+service httpd start
