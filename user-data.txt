@@ -1,0 +1,16 @@
+#!/bin/bash
+# Update packages
+yum update -y
+
+# install Java 17 (Amazon Corretto)
+yum install -y java-17-amazon-corretto
+
+# Create app directory
+mkdir -p /opt/myapp
+cd /opt/myapp
+
+# Download the JAR from S3
+wget https://joe-oregan-s3.s3.us-east-1.amazonaws.com/couponservice_v2_rds.jar -O /opt/myapp/couponservice_v2_rds.jar
+
+# Run the JAR in the background so it doesn't block boot
+nohup java -jar /opt/myapp/couponservice_v2_rds.jar > /opt/myapp/app.log 2>&1 &
