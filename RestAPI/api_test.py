@@ -2,10 +2,12 @@ import requests
 import time 
 
 # URL for REST API to test
-URL = "http://54.88.89.80:9091/couponapi/coupons"
+IPv4_ADDR = "13.218.220.21"
+PORT = "9091"
+URL = f"http://{IPv4_ADDR}:{PORT}/couponapi/coupons"
 
 def main():
-    for i in range(1, 101): # Make 100 requests
+    for i in range(1, 2501): # Make 100 requests
         start = time.time()
         try:
             response = requests.get(URL, timeout=5) # GET request
@@ -18,3 +20,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+      
