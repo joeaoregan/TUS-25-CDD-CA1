@@ -23,3 +23,6 @@ wget https://joe-oregan-s3.s3.us-east-1.amazonaws.com/index.html -O /var/www/htm
 
 # Start httpd
 service httpd start
+
+# Get text file to read to try and make the CPU work
+wget https://joe-oregan-s3.s3.us-east-1.amazonaws.com/alice.txt -O /opt/myapp/alice.txt
