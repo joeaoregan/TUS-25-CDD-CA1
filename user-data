@@ -10,19 +10,24 @@ mkdir -p /opt/myapp
 cd /opt/myapp
 
 # Download the JAR from S3
-wget https://joe-oregan-s3.s3.us-east-1.amazonaws.com/couponservice_v2_rds.jar -O /opt/myapp/couponservice_v2_rds.jar
+echo "Downloading Coupon Service Jar File from S3..."
+wget https://joe-oregan-s3.s3.us-east-1.amazonaws.com/couponservice_v3b_book.jar -O /opt/myapp/couponservice_v7.jar
 
 # Run the JAR in the background so it doesn't block boot
-nohup java -jar /opt/myapp/couponservice_v2_rds.jar > /opt/myapp/app.log 2>&1 &
+echo "Starting Coupon Service..."
+nohup java -jar /opt/myapp/couponservice_v7.jar > /opt/myapp/app.log 2>&1 &
 
 # Install http daemon web server
 yum install -y httpd
 
-# Get a test index file from the S3 bucket
+# Use index.html to demo load balancing
 wget https://joe-oregan-s3.s3.us-east-1.amazonaws.com/index.html -O /var/www/html/index.html
 
-# Start httpd
+echo "Starting httpd service..."
 service httpd start
 
-# Get text file to read to try and make the CPU work
+# CPU Plan B: Get text file to read to try and make the CPU work
 wget https://joe-oregan-s3.s3.us-east-1.amazonaws.com/alice.txt -O /opt/myapp/alice.txt
+
+# Add Stress Utility
+yum install -y stress
